@@ -1,12 +1,9 @@
 package com.example.movieappcompose.viewmodel
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieappcompose.data.Movie
-import com.example.movieappcompose.data.MovieResponse
 import com.example.movieappcompose.data.TMDBApi
 import com.example.movieappcompose.data.Trailer
 import com.example.movieappcompose.util.ApiKeyProvider.API_KEY
@@ -17,22 +14,16 @@ import kotlinx.coroutines.withContext
 class MovieViewModel : ViewModel() {
     private val apiService = TMDBApi.create()
 
-    // LiveData for popular movies
     val popularMovies = MutableLiveData<List<Movie>>()
 
-    // LiveData for top rated movies
     val topRatedMovies = MutableLiveData<List<Movie>>()
 
-    // LiveData for upcoming movies
     val upcomingMovies = MutableLiveData<List<Movie>>()
 
-    // LiveData for now playing movies
     val nowPlayingMovies = MutableLiveData<List<Movie>>()
 
-    // LiveData for search results
     val searchResults = MutableLiveData<List<Movie>>()
 
-    // Fetch popular movies
     fun fetchPopularMovies() {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
@@ -42,7 +33,6 @@ class MovieViewModel : ViewModel() {
         }
     }
 
-    // Fetch top rated movies
     fun fetchTopRatedMovies() {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
@@ -52,7 +42,6 @@ class MovieViewModel : ViewModel() {
         }
     }
 
-    // Fetch upcoming movies
     fun fetchUpcomingMovies() {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
@@ -62,7 +51,7 @@ class MovieViewModel : ViewModel() {
         }
     }
 
-    // Fetch now playing movies
+
     fun fetchNowPlayingMovies() {
         viewModelScope.launch {
             val response = withContext(Dispatchers.IO) {
@@ -72,7 +61,7 @@ class MovieViewModel : ViewModel() {
         }
     }
 
-    // Search movies
+   
     fun searchMovies(searchText: String) {
         viewModelScope.launch {
             if (searchText.isNotEmpty()) {
